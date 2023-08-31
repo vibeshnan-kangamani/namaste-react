@@ -1,0 +1,25 @@
+{
+  "name": "namaste-react",
+  "version": "1.0.0",
+  "description": "this is Namaste React Practice Project",
+  "main": "app.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vibeshnan-kangamani/namaste-react.git"
+  },
+  "keywords": [
+    "namaste-react"
+  ],
+  "author": "VIBI",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/vibeshnan-kangamani/namaste-react/issues"
+  },
+  "homepage": "https://github.com/vibeshnan-kangamani/namaste-react#readme",
+  "devDependencies": {
+    "parcel": "^2.9.3"
+  }
+}
