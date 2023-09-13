@@ -1,8 +1,13 @@
-import React from "react";
+import React, { lazy, Suspense } from "react";
 import ReactDOM from "react-dom/client";
 
 import HeaderComponent from "./components/Header";
 import BodyComponent from "./components/Body";
+
+import { createBrowserRouter, Outlet, RouterProvider } from "react-router-dom";
+import ErrorComponent from "./components/Error";
+import RestaurantMenu from "./components/RestaurantMenu";
+// import Grocery from "./components/Grocery";
 
 // EP-1 Inception
 // const parent = React.createElement("div",
@@ -17,7 +22,7 @@ import BodyComponent from "./components/Body";
 //         console.log("parent",parent);
 //         root.render(parent);
 
-// EP-3 
+// EP-3 s
 // Laying the foundation 
 
 // way of creating a element using core REACT
@@ -53,25 +58,35 @@ import BodyComponent from "./components/Body";
 
 // ? Food Delivery APP 
 
-
-
-
-
-
-
+const Grocery = lazy(() => import("./components/Grocery"));
+const AboutComponent = lazy(() => import("./components/About"));
+const ContactComponent = lazy(() => import("./components/Contact"));
 
 // todo ************** Layout Component  ***********************
 const AppLayoutComponent = () => {
         return (
                 <div className="app">
-                        <HeaderComponent />
-                        <BodyComponent />       
+                        <HeaderComponent /> 
+                        <Outlet></Outlet>
                 </div>
         )       
 };
 
 
+// todo ******************** Routing Configuration ************
+const appRoute = createBrowserRouter([
+    { path: "/", element: <AppLayoutComponent />, errorElement: <ErrorComponent />,children: [
+        { path: "/", element: <BodyComponent />},
+        { path: "/about", element: <Suspense fallback={<h1>Fallback display of About</h1>}><AboutComponent /></Suspense>},
+        { path: "/contact", element: <Suspense fallback={<h1>Fallback display of Contact</h1>}><ContactComponent /></Suspense>},
+        { path: "/grocery", element: <Suspense fallback={<h1>Fallback display of Grocery</h1>}><Grocery /></Suspense>},
+        { path: "/restaurant-menu/:resId", element: <RestaurantMenu />}
+    ]
+    }
+])
+
+
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
-root.render(<AppLayoutComponent />);
+root.render(<RouterProvider router= {appRoute} />);
