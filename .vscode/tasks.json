@@ -1,0 +1,38 @@
+{
+    // See https://go.microsoft.com/fwlink/?LinkId=733558
+    // for the documentation about the tasks.json format
+    "version": "2.0.0",
+    "tasks": [
+        // {
+        //     "label": "Start the Application",
+        //     "type": "shell",
+        //     "command": "cd P:\\Namaste React\\practices\\src\\utils &  json-server-auth --port 4300 data.json",
+        //     "windows": {
+        //       "command": "cd P:\\Namaste React\\practices\\src\\utils &  json-server-auth --port 4300 data.json"
+        //     },
+        //     "presentation": {
+        //       "reveal": "always",
+        //       "panel": "dedicated",
+        //       "close": false
+        //     },
+        //     "runOptions": { "runOn": "folderOpen" }
+        //   }
+
+        {
+          "label": "Start Json Server",
+          "type": "shell",
+          "command": "cmd.exe",
+          "args": ["/C", "cd P:\\Namaste React\\practices\\src\\utils &  json-server-auth --port 4300 data.json"],
+          "group": {
+            "kind": "build",
+            "isDefault": true
+          },
+          "presentation": {
+            "reveal": "always",
+            "panel": "dedicated",
+            "close": false
+          },
+          "runOptions": { "runOn": "folderOpen" }
+        }
+    ]
+}
