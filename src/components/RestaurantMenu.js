@@ -2,13 +2,18 @@ import { useEffect, useState } from "react";
 import Shimmer from "./shimmer";
 import { useParams } from "react-router-dom";
 import userRestaurantMenu from "../utils/useRestaurantMenu";
+import RestaurantCategory from "./RestaurantCategory";
 
 const RestaurantMenu = () => {
 
     useEffect(()=>{
         fetchMenu();
     },[]);
+
+
+    const  [ showIndex, setShowIndex] = useState(0);
     
+    // let [resMenuItems, setresMenuItems] = useState([]);
     const params = useParams();
     
     const resDetail = userRestaurantMenu(params.resId)
@@ -16,16 +21,14 @@ const RestaurantMenu = () => {
 
     if(resDetail.length === 0)   return (<Shimmer />)
     const res = resDetail[0];
-    const itemCards = res.restaurantMenu;
-    console.log(itemCards);
+    const resMenuItems = res.cards.filter(x => x.card.card['@type'] === "type.googleapis.com/swiggy.presentation.food.v2.ItemCategory");
+    // setresMenuItems(val );
+    console.log("🚀 ~ file: RestaurantMenu.js:21 ~ RestaurantMenu ~ resMenuItems:", resMenuItems)
     return (
-        <div className="menu">
-            <h1>{res.resInfo.name}</h1>
-            <p>{res.resInfo.cuisines.join(",")}</p>
-            <h2>Menu</h2>
-            <ul>
-                {  itemCards.map((item)=> <li key={item.card.info.id}> { item.card.info.name } - {  item.card.info.price  }</li>) }
-            </ul>
+        <div className="menu text-center">
+            { resMenuItems.map((category, index) =>  
+                <RestaurantCategory data={category.card.card} showItems={ index === showIndex && true } key={category.card.card.title}  setShowIndex ={ () => setShowIndex(index)}/>
+            ) }
         </div>
     )
 }

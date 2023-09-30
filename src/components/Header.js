@@ -19,7 +19,7 @@ const HeaderComponent  = () => {
 
 
     return ( 
-            <div className="flex justify-between  shadow-lg bg-cyan-600">
+            <div className="flex justify-between  shadow-lg bg-teal-600">
                     <div className="logo-container m-4 w-20 h-24">
                             <img className="logo w-20 h-24 block mx-auto rounded-full sm:mx-0 sm:shrink-0 bg-white" src= { APP_LOGO_URL } />
                     </div>
